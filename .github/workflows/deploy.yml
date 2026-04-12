@@ -71,9 +71,10 @@ jobs:
             echo "Configured COMPOSE_FILE: ${COMPOSE_FILE_PATH:-<empty>}"
             if [ -n "$COMPOSE_FILE_PATH" ] && [ ! -f "$COMPOSE_FILE_PATH" ]; then
               echo "Configured COMPOSE_FILE not found: $COMPOSE_FILE_PATH"
+              echo "Falling back to auto-detected compose file."
               echo "Stack directory contents:"
               ls -la "$STACK_DIR" || true
-              exit 1
+              COMPOSE_FILE_PATH=""
             fi
             if [ -z "$COMPOSE_FILE_PATH" ] && [ -n "$RESOLVED_STACK_COMPOSE" ]; then
               COMPOSE_FILE_PATH="$RESOLVED_STACK_COMPOSE"
@@ -86,9 +87,10 @@ jobs:
             echo "Configured ENV_FILE: ${ENV_FILE_PATH:-<empty>}"
             if [ -n "$ENV_FILE_PATH" ] && [ ! -f "$ENV_FILE_PATH" ]; then
               echo "Configured ENV_FILE not found: $ENV_FILE_PATH"
+              echo "Falling back to auto-detected env file."
               echo "Stack directory contents:"
               ls -la "$STACK_DIR" || true
-              exit 1
+              ENV_FILE_PATH=""
             fi
             if [ -z "$ENV_FILE_PATH" ] && [ -f "$STACK_DIR/.env.production" ]; then
               ENV_FILE_PATH="$STACK_DIR/.env.production"
