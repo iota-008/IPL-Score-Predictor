@@ -2,3 +2,8 @@
 .vscode
 __pycache__
 venv
+.env
+.env.production
+.env*
+!.env.example
+!.env.production.example

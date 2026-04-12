@@ -92,9 +92,16 @@ def predict():
 
         data = np.array([temp_array])
         print(data,file=sys.stderr)
-        my_prediction = int(regressor.predict(data))
+        my_prediction = int(regressor.predict(data)[0])
         print(my_prediction,file=sys.stderr)
-        return render_template('result.html', lower_limit = my_prediction-10, upper_limit = my_prediction+5)
+        return render_template('result.html', 
+                             lower_limit=my_prediction-10, 
+                             upper_limit=my_prediction+5,
+                             batting_team=batting_team,
+                             bowling_team=bowling_team,
+                             venue=venue,
+                             overs=overs,
+                             balls=balls)
 
 if __name__ == '__main__':  
 	app.run(debug=True)

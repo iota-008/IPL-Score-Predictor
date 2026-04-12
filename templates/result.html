@@ -1,151 +1,158 @@
 <!DOCTYPE html>
-
 <html lang="en" dir="ltr">
-
-    <head>
-        <meta charset="utf-8">
-        <title>First Innings Score Predictor</title>
-        <link rel="shortcut icon" href="{{ url_for('static', filename='ipl-favicon.ico') }}">
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-        <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
-    </head>
-
-    <body>
-
-        <!-- Website Title -->
-        <div class="container">
-            <h2 class="container-heading"><span class="heading_first">First Innings Score Predictor for </span><span
-                    class="heading_second">Indian Premier League (IPL)</span></h2>
-            <div class="description">
-                <p>A Machine Learning Web App, Built with Flask, Deployed using Heroku.</p>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result - IPL Score Predictor</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ipl-favicon.ico') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles-modern.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f3f547070.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-fire"></i>
+                <h1>IPL Score Predictor</h1>
             </div>
+            <p class="tagline">powered by machine learning</p>
         </div>
+    </header>
 
-        <!-- Prediction Area -->
-        <div class="prediction-area">
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Result Section -->
+        <section class="result-section">
+            <div class="result-container">
+                <!-- Match Matchup -->
+                <div class="match-matchup">
+                    <div class="team-badge batting-team">
+                        {% if batting_team == 'Mumbai Indians' %}
+                            <img src="{{ url_for('static', filename='mi.jpg') }}" alt="{{ batting_team }}">
+                        {% elif batting_team == 'Kolkata Knight Riders' %}
+                            <img src="{{ url_for('static', filename='kkr.jpg') }}" alt="{{ batting_team }}">
+                        {% elif batting_team == 'Chennai Super Kings' %}
+                            <img src="{{ url_for('static', filename='csk.png') }}" alt="{{ batting_team }}">
+                        {% elif batting_team == 'Rajasthan Royals' %}
+                            <img src="{{ url_for('static', filename='rr.png') }}" alt="{{ batting_team }}">
+                        {% elif batting_team == 'Kings XI Punjab' %}
+                            <img src="{{ url_for('static', filename='kxip.png') }}" alt="{{ batting_team }}">
+                        {% elif batting_team == 'Royal Challengers Bangalore' %}
+                            <img src="{{ url_for('static', filename='rcb.png') }}" alt="{{ batting_team }}">
+                        {% elif batting_team == 'Delhi Daredevils' %}
+                            <img src="{{ url_for('static', filename='dc.png') }}" alt="{{ batting_team }}">
+                        {% elif batting_team == 'Sunrisers Hyderabad' %}
+                            <img src="{{ url_for('static', filename='srh.png') }}" alt="{{ batting_team }}">
+                        {% endif %}
+                        <p class="team-name">{{ batting_team }}</p>
+                    </div>
 
-            <!-- IPL Banner - 1 -->
-            <div class="ipl-banner-left">
+                    <div class="vs-divider">
+                        <span>vs</span>
+                    </div>
 
-                <div class="slider-frame">
-                    <div class="slide-images-up">
-
-                        <!-- Image-1 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='mi.jpg') }}"
-                                alt="Mumbai Indians">
-                        </div>
-                        <!-- Image-2 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='srh.png') }}"
-                                alt="Sunrisers Hyderabad">
-                        </div>
-                        <!-- Image-3 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='rcb.png') }}"
-                                alt="Royal Challengers Bangalore">
-                        </div>
-                        <!-- Image-4 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='dc.png') }}"
-                                alt="Delhi Capitals">
-                        </div>
-                        <!-- Image-5 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='rr.png') }}"
-                                alt="Rajasthan Royals">
-                        </div>
-                        <!-- Image-6 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='kkr.jpg') }}"
-                                alt="Kolkata Knight Riders">
-                        </div>
-                        <!-- Image-7 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='kxip.png') }}"
-                                alt="Kings XI Punjab">
-                        </div>
-                        <!-- Image-8 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='csk.png') }}"
-                                alt="Chennai Super Kings">
-                        </div>
-
+                    <div class="team-badge bowling-team">
+                        {% if bowling_team == 'Mumbai Indians' %}
+                            <img src="{{ url_for('static', filename='mi.jpg') }}" alt="{{ bowling_team }}">
+                        {% elif bowling_team == 'Kolkata Knight Riders' %}
+                            <img src="{{ url_for('static', filename='kkr.jpg') }}" alt="{{ bowling_team }}">
+                        {% elif bowling_team == 'Chennai Super Kings' %}
+                            <img src="{{ url_for('static', filename='csk.png') }}" alt="{{ bowling_team }}">
+                        {% elif bowling_team == 'Rajasthan Royals' %}
+                            <img src="{{ url_for('static', filename='rr.png') }}" alt="{{ bowling_team }}">
+                        {% elif bowling_team == 'Kings XI Punjab' %}
+                            <img src="{{ url_for('static', filename='kxip.png') }}" alt="{{ bowling_team }}">
+                        {% elif bowling_team == 'Royal Challengers Bangalore' %}
+                            <img src="{{ url_for('static', filename='rcb.png') }}" alt="{{ bowling_team }}">
+                        {% elif bowling_team == 'Delhi Daredevils' %}
+                            <img src="{{ url_for('static', filename='dc.png') }}" alt="{{ bowling_team }}">
+                        {% elif bowling_team == 'Sunrisers Hyderabad' %}
+                            <img src="{{ url_for('static', filename='srh.png') }}" alt="{{ bowling_team }}">
+                        {% endif %}
+                        <p class="team-name">{{ bowling_team }}</p>
                     </div>
                 </div>
 
-            </div>
-
-            <!-- Result -->
-            <div class="results">
-                <p class="result-p">The final predicted score (range): {{ lower_limit }} to {{ upper_limit }}</p>
-            </div>
-
-            <!-- IPL Banner - 2 -->
-            <div class="ipl-banner-right">
-
-                <div class="slider-frame">
-                    <div class="slide-images-down">
-
-                        <!-- Image-1 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='mi.jpg') }}"
-                                alt="Mumbai Indians">
-                        </div>
-                        <!-- Image-2 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='srh.png') }}"
-                                alt="Sunrisers Hyderabad">
-                        </div>
-                        <!-- Image-3 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='rcb.png') }}"
-                                alt="Royal Challengers Bangalore">
-                        </div>
-                        <!-- Image-4 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='dc.png') }}"
-                                alt="Delhi Capitals">
-                        </div>
-                        <!-- Image-5 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='kkr.jpg') }}"
-                                alt="Kolkata Knight Riders">
-                        </div>
-                        <!-- Image-6 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='rr.png') }}"
-                                alt="Rajasthan Royals">
-                        </div>
-                        <!-- Image-7 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='kxip.png') }}"
-                                alt="Kings XI Punjab">
-                        </div>
-                        <!-- Image-8 -->
-                        <div class="image-container">
-                            <img class="image-width" src="{{ url_for('static', filename='csk.png') }}"
-                                alt="Chennai Super Kings">
-                        </div>
-
+                <!-- Match Details -->
+                <div class="match-details">
+                    <div class="detail-card">
+                        <i class="fas fa-map-pin"></i>
+                        <p class="detail-label">Venue</p>
+                        <p class="detail-value">{{ venue }}</p>
+                    </div>
+                    <div class="detail-card">
+                        <i class="fas fa-hourglass"></i>
+                        <p class="detail-label">Current Over</p>
+                        <p class="detail-value">{{ overs }}.{{ balls }}</p>
                     </div>
                 </div>
 
+                <div class="result-animation">
+                    <i class="fas fa-sparkles"></i>
+                </div>
+                
+                <h2 class="result-title">Prediction Result</h2>
+                
+                <div class="score-card">
+                    <div class="score-content">
+                        <p class="score-label">Predicted First Innings Score Range</p>
+                        <div class="score-display">
+                            <span class="score-min">{{ lower_limit }}</span>
+                            <span class="score-separator">—</span>
+                            <span class="score-max">{{ upper_limit }}</span>
+                        </div>
+                        <p class="score-description">
+                            Expected score for {{ batting_team }} on this track
+                        </p>
+                    </div>
+                </div>
+
+                <div class="result-info">
+                    <div class="info-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>AI-Powered Analysis</h4>
+                        <p>Ridge Regression model trained on 20+ years of IPL data</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-target"></i>
+                        <h4>Range Prediction</h4>
+                        <p>Lower and upper bounds for expected score</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-database"></i>
+                        <h4>Real-time Data</h4>
+                        <p>Input current match statistics for accurate predictions</p>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <a href="/" class="btn btn-primary">
+                        <i class="fas fa-arrow-left"></i> Make Another Prediction
+                    </a>
+                    <button class="btn btn-secondary" onclick="window.print()">
+                        <i class="fas fa-download"></i> Save Result
+                    </button>
+                </div>
             </div>
-        </div>
+        </section>
+    </main>
 
-        <!-- Footer -->
-        <div class="footer">
-            <div class="contact">
-                <a target="_blank" href="https://github.com/iota-008/iota"><i
-                        class="fab fa-github fa-lg contact-icon"></i></a>
-                <a target="_blank" href="https://www.linkedin.com/in/ankit-raibole-a18b82170/"><i
-                        class="fab fa-linkedin fa-lg contact-icon"></i></a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">Built with Machine Learning | Powered by Flask</p>
+            <div class="footer-links">
+                <a href="https://github.com" target="_blank" rel="noopener">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin"></i>
+                </a>
             </div>
-            <p class="footer-description">Made with ❤️ by Ankit Raibole.</p>
+            <p class="footer-credit">Made with ❤️ for Cricket Lovers</p>
         </div>
-
-    </body>
-
+    </footer>
+</body>
 </html>
