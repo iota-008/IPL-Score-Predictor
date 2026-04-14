@@ -59,11 +59,10 @@ https://user-images.githubusercontent.com/46680697/150517395-f537a2de-8b57-49e4-
 
 
 ## Screenshots
-![Home Page](/screenshots/3.png?raw=true "Optional Title")
 
-![Enter the match situation](/screenshots/4.png?raw=true "Optional Title")
+<img width="1412" height="1144" alt="image" src="https://github.com/user-attachments/assets/e82ae00e-db4f-4ae2-8cde-92d9bd22d886" />
 
-![Predicted Score Range](/screenshots/2.png?raw=true "Optional Title")
+<img width="1322" height="1165" alt="image" src="https://github.com/user-attachments/assets/5c2f7e76-f76e-4044-b74f-4ce627db7c9e" />
 
 
 ## Tech Stack
